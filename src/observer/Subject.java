@@ -1,15 +1,13 @@
 package observer;
 
-public interface Subject {
+public interface Subject<T> {
 	/*增加观察者*/  
-	public void add(Observer observer);  
+	public void register(Observer<T> observer);
 
 	/*删除观察者*/  
-	public void del(Observer observer);  
+	public void unregister(Observer<T> observer);
 
 	/*通知所有的观察者*/  
-	public void notifyObservers();  
+	public void notifyObservers(T data);
 
-	/*自身的操作*/  
-	public void operation();  
 }

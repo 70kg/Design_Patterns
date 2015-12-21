@@ -1,14 +1,14 @@
 package observer;
+
 /**
  * 实现类2
- * @author Mr_Wrong
  *
+ * @author Mr_Wrong
  */
-public class Observer2 implements Observer{
+public class Observer2 implements Observer<Weather> {
 
-	public void update() {
-		// TODO Auto-generated method stub
-		System.out.println("Observer2接受到");
-	}
-
+    @Override
+    public void update(Subject<Weather> subject, Weather data) {
+        System.out.println(data.getDescription());
+    }
 }

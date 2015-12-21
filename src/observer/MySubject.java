@@ -1,10 +1,8 @@
 package observer;
 
-public class MySubject extends AbstractSubject{
+public class MySubject extends AbstractSubject<Weather> {
 
-	public void operation() {
-		System.out.println("自己更新");
-		notifyObservers();
-	}
+    public MySubject() {
 
+    }
 }

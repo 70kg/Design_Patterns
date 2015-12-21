@@ -3,23 +3,31 @@ package observer;
 import java.util.Enumeration;
 import java.util.Vector;
 
-public abstract class AbstractSubject implements Subject{
+public abstract class AbstractSubject<T> implements Subject<T> {
 
-	private Vector<Observer> vector = new Vector<Observer>();
-	public void add(Observer observer) {
-		vector.add(observer);		
-	}
+    private Vector<Observer<T>> vector = new Vector<Observer<T>>();
 
-	public void del(Observer observer) {
-		vector.remove(observer);		
-	}
+    @Override
+    public void register(Observer<T> observer) {
+        if (observer == null) {
+            throw new NullPointerException("observer == null");
+        }
+        if (!vector.contains(observer)) {
+            vector.add(observer);
+        }
+    }
 
-	public void notifyObservers() {
-		Enumeration<Observer> enumeration = vector.elements();	
-		while(enumeration.hasMoreElements()){
-			enumeration.nextElement().update();
-		}
-	}
+    @Override
+    public void unregister(Observer<T> observer) {
+        vector.remove(observer);
+    }
 
+    @Override
+    public void notifyObservers(T data) {
+        Enumeration<Observer<T>> enumeration = vector.elements();
+        while (enumeration.hasMoreElements()) {
+            enumeration.nextElement().update(this, data);
+        }
+    }
 
 }
